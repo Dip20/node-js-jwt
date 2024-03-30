@@ -1,0 +1,96 @@
+{
+	"info": {
+		"_postman_id": "6518da48-c1b1-4628-9a9d-26c4808a0924",
+		"name": "Node Project 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23530509",
+		"_collection_link": "https://lively-rocket-532613.postman.co/workspace/9fcc05aa-160e-4d1b-8d0c-f9a6cfb86127/collection/23530509-6518da48-c1b1-4628-9a9d-26c4808a0924?action=share&source=collection_link&creator=23530509"
+	},
+	"item": [
+		{
+			"name": "Generate JTW",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jasonData = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"token\", jasonData.token)"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"santu\",\r\n    \"email\": \"santu@test.com\",\r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/generate-jwt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"generate-jwt"
+					]
+				},
+				"description": "Token is valid for 24 Hours"
+			},
+			"response": []
+		},
+		{
+			"name": "Validate JTW",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"santu\",\r\n    \"email\": \"santu@test.com\",\r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/verify-jwt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"verify-jwt"
+					]
+				},
+				"description": "Token is valid for 24 Hours"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}
