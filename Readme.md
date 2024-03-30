@@ -1,3 +1,3 @@
 In this project:
-> JWT generate
-> JWT verify
+* JWT generate
+* JWT verify
